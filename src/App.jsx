@@ -1,6 +1,4 @@
 
-import './App.css'
-
 import React, { useState , useCallback} from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { fetchMovies } from './api.js';
@@ -8,7 +6,9 @@ import Navbar from './components/Navbar.jsx';
 import MovieCard from './components/MovieCard.jsx';
 import MovieDetail from './components/MovieDetail.jsx';
 import Watchlist from './components/Watchlist.jsx';
-import SignIn from "./components/SignIn.jsx"
+import Login from './components/Login.jsx';
+import { Footer } from './components/Footer.jsx';
+
 
 const App = () => {
   const [movies, setMovies] = useState([]);
@@ -32,15 +32,20 @@ const App = () => {
 
   return (
     <Router>
+
+      <div className='min-h-screen flex flex-col'> 
+        
+      <header>
       <Navbar onSearch={handleSearch}/>
+      </header>
      
-      
+      <section className='flex-grow-1'>
       <Routes> 
         <Route path="/watchlist" element={<Watchlist watchlist={watchlist} onRemoveFromWatchlist={handleRemoveFromWatchlist} />} />
         <Route path="/movie/:id" element={<MovieDetail movies={movies} />} />
-        <Route path="/signin" element={<SignIn/>} />
+        <Route path="/login" element={<Login/>} />
         <Route path="/" element={
-          <div className="movie-list">
+          <div className="flex w-full flex-wrap justify-around">
             {movies.map((movie) => (
               <MovieCard
                 key={movie.id}
@@ -51,17 +56,19 @@ const App = () => {
           </div>
         } />
       </Routes>
+     </section>
+    
+    <footer>
+      <Footer/>
+    </footer>
+
+    </div>
+
     </Router>
+
+
   );
 };
-
-// const App = () => {
-//   return (
-//     <>
-//     <h1> Hello world</h1>
-//     </>
-//   )
-// }
 
 
 export default App;

@@ -15,12 +15,12 @@ const SearchBar = ({ onSearch }) => {
   };
 
   return (
-    <form onSubmit={handleSearch}>
+    <form className="flee"onSubmit={handleSearch}>
       <input
         type="text"
         placeholder="Search for movies..."
         value={query}
-        onChange={handleChange}
+        onChange={handleChange} className='w-80'
       />
       <button type="submit">Search</button>
     </form>
