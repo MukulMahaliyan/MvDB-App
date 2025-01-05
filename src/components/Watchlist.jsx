@@ -1,22 +1,26 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useAuth } from '../AuthContext';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+
+//const SERVER_URL = import.meta.env.VITE_SERVER_URL;
 
 const Watchlist = ({ watchlist, onRemoveFromWatchlist }) => {
   const {user} = useAuth();
   const navigate = useNavigate();
   
-  //
-  if(!user){
-    navigate('/login');
+  
+  useEffect( ()=>{
+    const goToLogin =  () => {
+    if (!user) {
+      // If the user is not logged in, redirect to login page
+      alert("Login to add movies to Watchlist");
+     // navigate('/login');  // Redirect to '/login'
+    }
   }
-
-  // useEffect(() => {
-  //   if (!user) {
-  //     // If the user is not logged in, redirect to login page
-  //     navigate('/login');  // Redirect to '/login'
-  //   }
-  // }, [user, navigate]); 
+   goToLogin();
+    
+  },[user]);
 
   return (
     <div className="watchlist">

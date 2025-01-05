@@ -8,6 +8,7 @@ const MovieCard = ({ movie, onAddToWatchlist }) => {
   const handleAddToWatchlist = () => {
     if(!user){
       enqueueAction((movie) => onAddToWatchlist(movie));
+      alert("login to add movies to watchlist");
     }
     else{
       onAddToWatchlist(movie);

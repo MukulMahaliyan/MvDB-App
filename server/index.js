@@ -4,10 +4,9 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 import express from 'express';
-
-
 import { connectDB } from './config/database.js';
 
+import { MongoClient } from "mongodb";
 
 
 // Initialize Express 
@@ -19,15 +18,24 @@ connectDB();
 //read from req.body
 app.use(express.json());
 
+app.use(express.urlencoded({ extended: true }));
+
+
 
 app.get('/',(req,res)=>{
     res.writeHead(429,{'retry-after':'10s'});
     res.end();
 });
 
+app.post('/',(req,res)=>{
+    const {email, password} = req.body;
+    console.log(email);
+    console.log(password);
+    res.end();
+})
 import { apiRouter } from './routes/apiRoutes.js'
 
-//mount apitRoutes to /api endpoint
+//mount apiRoutes to /api endpoint
 app.use('/api',apiRouter);
 
 // Start the server
